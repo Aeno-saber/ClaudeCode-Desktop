@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy"
+      content="default-src 'none'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'none';">
+<title>Claude Desktop</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- ===================== 图标精灵 ===================== -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+  <symbol id="i-send" viewBox="0 0 24 24"><path d="M12 19V5M5 12l7-7 7 7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-stop" viewBox="0 0 24 24"><rect x="7" y="7" width="10" height="10" rx="1.6" fill="currentColor"/></symbol>
+  <symbol id="i-panel" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M9.5 4v16" stroke="currentColor" stroke-width="1.8"/></symbol>
+  <symbol id="i-trash" viewBox="0 0 24 24"><path d="M4 7h16M9 7V5h6v2M6 7l1 12h10l1-12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-pencil" viewBox="0 0 24 24"><path d="M4 20h4l10-10-4-4L4 16v4zM14 6l4 4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-gear" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3.2" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 3v2.2M12 18.8V21M21 12h-2.2M5.2 12H3M18.4 5.6l-1.6 1.6M7.2 16.8l-1.6 1.6M18.4 18.4l-1.6-1.6M7.2 7.2 5.6 5.6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+  <symbol id="i-copy" viewBox="0 0 24 24"><rect x="9" y="9" width="11" height="11" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M15 9V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h3" fill="none" stroke="currentColor" stroke-width="1.8"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5 9.5 17 19 7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-chevron" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-arrow-down" viewBox="0 0 24 24"><path d="M12 5v14M5 12l7 7 7-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-terminal" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M7 9l3 3-3 3M13 15h4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-file" viewBox="0 0 24 24"><path d="M6 3h7l5 5v13H6z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M13 3v5h5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></symbol>
+  <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="m16 16 4.5 4.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+  <symbol id="i-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+  <symbol id="i-folder" viewBox="0 0 24 24"><path d="M3 7a2 2 0 0 1 2-2h4l2 2.4h8a2 2 0 0 1 2 2V17a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></symbol>
+  <symbol id="i-brain" viewBox="0 0 24 24"><path d="M9 4.5A3.5 3.5 0 0 0 5.5 8 3 3 0 0 0 4 10.8 3 3 0 0 0 6 13.5 3 3 0 0 0 8 19a3 3 0 0 0 4-1.6V6.8A3 3 0 0 0 9 4.5zM15 4.5A3.5 3.5 0 0 1 18.5 8 3 3 0 0 1 20 10.8a3 3 0 0 1-2 2.7A3 3 0 0 1 16 19a3 3 0 0 1-4-1.6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></symbol>
+  <symbol id="i-bolt" viewBox="0 0 24 24"><path d="M13 3 5 14h6l-1 7 8-11h-6z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></symbol>
+  <symbol id="i-code" viewBox="0 0 24 24"><path d="m9 8-4 4 4 4M15 8l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-puzzle" viewBox="0 0 24 24"><path d="M10 4.5a2 2 0 1 1 4 0V6h3a1 1 0 0 1 1 1v3h1.5a2 2 0 1 1 0 4H18v3a1 1 0 0 1-1 1h-3v-1.5a2 2 0 1 0-4 0V18H7a1 1 0 0 1-1-1v-3H4.5a2 2 0 1 1 0-4H6V7a1 1 0 0 1 1-1h3z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></symbol>
+  <symbol id="i-power" viewBox="0 0 24 24"><path d="M12 4v8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M7.5 7a7 7 0 1 0 9 0" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/></symbol>
+  <symbol id="i-undo" viewBox="0 0 24 24"><path d="M9 8H5V4" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/><path d="M5 8a8 8 0 1 1-1 6" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/></symbol>
+  <symbol id="i-refresh" viewBox="0 0 24 24"><path d="M20 11a8 8 0 1 0-2 6" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/><path d="M20 5v6h-6" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+</svg>
+
+<div class="app" id="app">
+
+  <!-- ===================== 侧边栏 ===================== -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sb-head">
+      <button class="icon-btn" id="btnCollapse" title="收起侧边栏 (Ctrl+B)">
+        <svg class="ic"><use href="#i-panel"/></svg>
+      </button>
+      <div class="sb-brand">Claude Desktop</div>
+    </div>
+
+    <div class="sb-actions">
+      <button class="new-chat" id="btnNew">
+        <svg class="ic"><use href="#i-plus"/></svg>
+        <span>新对话</span>
+      </button>
+      <div class="sb-search">
+        <svg class="ic"><use href="#i-search"/></svg>
+        <input id="searchInput" type="text" placeholder="搜索对话" spellcheck="false">
+      </div>
+    </div>
+
+    <nav class="conv-list" id="convList"></nav>
+
+    <div class="sb-foot">
+      <button class="foot-btn" id="btnSkills" title="技能管家 — 一键停用 / 恢复 ~/.workbuddy/skills">
+        <svg class="ic"><use href="#i-puzzle"/></svg><span>技能管家</span>
+      </button>
+      <button class="foot-btn" id="btnMemory" title="打开该工作目录的项目记忆">
+        <svg class="ic"><use href="#i-brain"/></svg><span>项目记忆</span>
+      </button>
+      <button class="foot-btn" id="btnSettings">
+        <svg class="ic"><use href="#i-gear"/></svg><span>设置</span>
+      </button>
+    </div>
+  </aside>
+
+  <!-- ===================== 主区 ===================== -->
+  <div class="main">
+    <header class="topbar">
+      <button class="icon-btn only-collapsed" id="btnExpand" title="展开侧边栏 (Ctrl+B)">
+        <svg class="ic"><use href="#i-panel"/></svg>
+      </button>
+      <button class="chip" id="chipModel" title="切换模型 / 供应商配置">
+        <svg class="ic"><use href="#i-bolt"/></svg>
+        <span id="modelLabel">…</span>
+        <svg class="ic sm"><use href="#i-chevron"/></svg>
+      </button>
+      <button class="chip" id="chipPerm" title="权限模式">
+        <span class="dot" id="permDot"></span>
+        <span id="permLabel">…</span>
+        <svg class="ic sm"><use href="#i-chevron"/></svg>
+      </button>
+      <div class="topbar-spacer"></div>
+    </header>
+
+    <div class="thread-wrap" id="threadWrap">
+      <div class="thread" id="thread"></div>
+
+      <div class="welcome" id="welcome">
+        <img class="welcome-logo" src="../assets/claude-logo.png" alt="">
+        <h1 id="welcomeTitle">今天想做点什么？</h1>
+        <p class="welcome-sub" id="welcomeSub">
+          接的是你本机的 Claude Code，模型与供应商可以在顶栏随时切换。
+        </p>
+        <div class="suggest" id="suggest"></div>
+      </div>
+
+      <button class="scroll-bottom" id="scrollBottom" title="回到底部">
+        <svg class="ic"><use href="#i-arrow-down"/></svg>
+      </button>
+    </div>
+
+    <div class="composer-area">
+      <div class="composer-box" id="composerBox">
+        <textarea id="input" rows="1" placeholder="给 Claude Code 发消息…（Enter 发送，Shift+Enter 换行）"
+                  spellcheck="false"></textarea>
+        <button class="send-btn" id="btnSend" title="发送">
+          <svg class="ic"><use href="#i-send"/></svg>
+        </button>
+      </div>
+      <div class="composer-foot">
+        <button class="foot-chip" id="chipCwd" title="工作目录（右键在资源管理器中打开）">
+          <svg class="ic sm"><use href="#i-folder"/></svg>
+          <span id="cwdLabel">…</span>
+        </button>
+        <div class="foot-right">
+          <span class="engine-state" id="engineState"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== 设置面板 ===================== -->
+<div class="modal-backdrop" id="modal" hidden>
+  <div class="modal">
+    <div class="modal-head">
+      <h2>设置</h2>
+      <button class="icon-btn" id="btnCloseModal"><svg class="ic"><use href="#i-close"/></svg></button>
+    </div>
+    <div class="modal-body">
+
+      <section class="set-sec">
+        <h3>外观</h3>
+        <div class="set-row">
+          <label>主题</label>
+          <div class="seg" id="segTheme">
+            <button data-value="dark">深色</button>
+            <button data-value="light">浅色</button>
+          </div>
+        </div>
+        <div class="set-row">
+          <label>显示思考过程</label>
+          <label class="switch"><input type="checkbox" id="optThinking"><span></span></label>
+        </div>
+        <div class="set-row">
+          <label>默认展开工具输出</label>
+          <label class="switch"><input type="checkbox" id="optToolOut"><span></span></label>
+        </div>
+      </section>
+
+      <section class="set-sec">
+        <h3>引擎</h3>
+        <div class="set-row">
+          <label>权限模式</label>
+          <select id="selPerm"></select>
+        </div>
+        <p class="set-note" id="permNote"></p>
+        <div class="set-row">
+          <label>模型覆盖</label>
+          <input type="text" id="inpModel" placeholder="留空 = 跟随下面所选配置里的模型">
+        </div>
+        <p class="set-note">
+          这是「配置档案之上的一层覆盖」，用来临时换个模型而不改档案本身。
+          切换配置档案时，如果这个名字在新档案里不存在，会被自动清掉（否则必然请求一个不存在的模型）。
+        </p>
+        <div class="set-row col">
+          <label>claude 可执行文件</label>
+          <div class="path-row">
+            <input type="text" id="inpExe" placeholder="留空 = 自动探测扩展目录">
+            <button class="btn" id="btnPickExe">浏览</button>
+          </div>
+          <p class="set-note" id="exeNote"></p>
+        </div>
+      </section>
+
+      <section class="set-sec" id="secProfiles">
+        <h3>模型配置 <span class="sec-sub" id="profilesSub"></span></h3>
+        <p class="set-note">
+          每条配置 = 一套 API 地址 + 令牌 + 模型，切换<strong>立刻生效</strong>。
+          默认只作用于本应用：启动会话时用 <code>--settings</code> 指定一份独立的配置，
+          再挡掉用户级设置，所以<strong>不会动你全局的 <code>~/.claude/settings.json</code></strong>。
+        </p>
+        <div class="prof-list" id="profList"></div>
+        <div class="prof-actions">
+          <button class="btn primary" id="btnProfAdd">新增配置</button>
+          <button class="btn" id="btnProfImportCc">从 cc-switch 导入</button>
+          <button class="btn" id="btnProfImportGlobal">从当前设置导入</button>
+        </div>
+        <div class="prof-editor" id="profEditor" hidden></div>
+        <div class="set-row">
+          <label>
+            同时写入 <code>~/.claude/settings.json</code>
+            <br><span class="set-hint">打开后 VS Code / Trae 里的 Claude Code 扩展也会跟着换供应商（写入前自动备份，只替换 env 一个键）</span>
+          </label>
+          <label class="switch"><input type="checkbox" id="optSyncGlobal"><span></span></label>
+        </div>
+        <p class="set-note" id="syncNote"></p>
+      </section>
+
+      <section class="set-sec">
+        <h3>工作目录</h3>
+        <div class="path-row">
+          <input type="text" id="inpCwd" readonly>
+          <button class="btn" id="btnPickCwd">选择</button>
+        </div>
+        <p class="set-note">
+          Claude Code 的会话与「项目记忆」都是按工作目录分组的。
+          <strong>同一个工作目录下的新对话会共享项目记忆</strong>——它会把事实自动写进
+          <code>~/.claude/projects/&lt;目录&gt;/memory/</code> 并在后续每个会话里加载。
+          想得到完全干净的上下文，就换一个工作目录。
+        </p>
+      </section>
+
+      <section class="set-sec">
+        <h3>关于</h3>
+        <div class="kv"><span>版本</span><b id="aboutVer">—</b></div>
+        <div class="kv"><span>Electron</span><b id="aboutEle">—</b></div>
+        <div class="kv"><span>claude</span><b id="aboutClaude">—</b></div>
+        <div class="kv"><span>数据目录</span><b id="aboutData">—</b></div>
+        <div class="set-row" style="margin-top:8px">
+          <button class="btn" id="btnOpenData">打开数据目录</button>
+        </div>
+      </section>
+
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast" hidden></div>
+
+<!-- ===================== 技能管家 ===================== -->
+<div class="modal-backdrop" id="skillsModal" hidden>
+  <div class="modal modal-wide">
+    <div class="modal-head">
+      <h2>技能管家</h2>
+      <button class="icon-btn" id="btnCloseSkills"><svg class="ic"><use href="#i-close"/></svg></button>
+    </div>
+    <div class="modal-body">
+
+      <div class="sk-bar">
+        <div class="sk-counts" id="skCounts">…</div>
+        <div class="sk-bar-right">
+          <button class="btn sm" id="btnRestoreAll" hidden>
+            <svg class="ic sm"><use href="#i-undo"/></svg><span id="restoreAllLabel">全部恢复</span>
+          </button>
+          <button class="btn sm" id="btnSkRefresh" title="重新扫描磁盘">
+            <svg class="ic sm"><use href="#i-refresh"/></svg><span>刷新</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="sk-bulk" id="skBulk" hidden>
+        <span>已选中 <b id="skBulkN">0</b> 个</span>
+        <button class="btn sm" id="btnSkBulkDisable">停用选中</button>
+        <button class="btn sm" id="btnSkBulkEnable">恢复选中</button>
+        <button class="btn sm" id="btnSkBulkClear">取消选择</button>
+      </div>
+      <p class="set-note" id="skNote">
+        停用 = 把目录挪到<strong>停用区</strong>，文件一个都不删。想用的时候点一下就回来了。
+      </p>
+
+      <div class="sk-grid" id="skGrid"></div>
+
+      <div class="sk-foot">
+        <button class="btn sm" id="btnOpenSkRoot">打开技能目录</button>
+        <button class="btn sm" id="btnOpenSkDisabled">打开停用区</button>
+        <span class="sk-root-path mono" id="skRootPath"></span>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script src="markdown.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

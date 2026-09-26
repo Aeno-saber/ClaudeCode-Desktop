@@ -1,0 +1,40 @@
+# ---- 构建产物（约 350 MB，不进仓库）----
+release/
+dist/
+build/
+*.exe
+*.msi
+*.dmg
+*.AppImage
+
+# ---- 本地调试与备份（含本机路径、日志、截图）----
+_backup/
+_probe/
+*.log
+*.bak
+
+# ---- 依赖 ----
+node_modules/
+package-lock.json
+
+# ---- 运行期数据（若被拷进目录）----
+*.db
+*.sqlite
+*.sqlite3
+
+# ---- 编辑器 / 系统 ----
+.vscode/
+.idea/
+Thumbs.db
+desktop.ini
+Desktop.ini
+.DS_Store
+
+# ---- 敏感文件兜底（防止误提交）----
+.env
+.env.*
+*.pem
+*.key
+*.p12
+*.pfx
+secrets.json

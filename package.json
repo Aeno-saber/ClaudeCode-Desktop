@@ -1,0 +1,13 @@
+{
+  "name": "claude-desktop",
+  "productName": "Claude Desktop",
+  "version": "0.1.0",
+  "description": "Claude Code 桌面版 — ChatGPT 风格界面",
+  "main": "main.js",
+  "private": true,
+  "scripts": {
+    "start": "electron .",
+    "probe": "node tools/probe.js"
+  },
+  "license": "MIT"
+}

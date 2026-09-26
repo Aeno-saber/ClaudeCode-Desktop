@@ -1,0 +1,18 @@
+# 仓库内统一用 LF 存储，检出到工作区时由 git 自动处理。
+# 不写这条的话，Windows 上每次提交都可能因为 CRLF/LF 产生整文件 diff。
+* text=auto eol=lf
+
+# 明确按文本处理
+*.js    text eol=lf
+*.json  text eol=lf
+*.html  text eol=lf
+*.css   text eol=lf
+*.md    text eol=lf
+*.py    text eol=lf
+*.sh    text eol=lf
+*.cmd   text eol=crlf
+
+# 二进制，别碰
+*.png   binary
+*.ico   binary
+*.exe   binary
